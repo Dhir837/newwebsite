@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elegant Resume Builder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-bg: linear-gradient(135deg, #e3ffe7 0%, #d9e7ff 100%);
+      --primary: #5e60ce;
+      --accent: #48bfe3;
+      --text-dark: #22223b;
+      --text-light: #4a4e69;
+      --border-radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--main-bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      background: white;
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 15px;
+      margin: 12px 0;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      transition: border 0.3s ease;
+    }
+
+    form input:focus, form textarea:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 10px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: var(--accent);
+      transform: scale(1.03);
+    }
+
+    #resume {
+      display: none;
+      margin-top: 40px;
+      background: #fefefe;
+      border: 1px solid #eee;
+      border-radius: var(--border-radius);
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    #resume h2 {
+      color: var(--text-dark);
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+    }
+
+    #resume p {
+      margin-bottom: 12px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .print-btn {
+      background-color: #06d6a0;
+    }
+
+    .print-btn:hover {
+      background-color: #04b88a;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #resume, #resume * {
+        visibility: visible;
+      }
+      #resume {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌟 Elegant Resume Builder</h1>
+    <form id="resumeForm">
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="email" id="email" placeholder="Email Address" required />
+      <input type="tel" id="phone" placeholder="Phone Number" required />
+      <textarea id="summary" placeholder="Professional Summary" rows="4"></textarea>
+      <textarea id="education" placeholder="Education" rows="4"></textarea>
+      <textarea id="experience" placeholder="Work Experience" rows="4"></textarea>
+      <textarea id="skills" placeholder="Skills" rows="4"></textarea>
+      <button type="submit">✨ Generate Resume</button>
+    </form>
+
+    <div id="resume">
+      <h2 id="rName"></h2>
+      <p><strong>Email:</strong> <span id="rEmail"></span></p>
+      <p><strong>Phone:</strong> <span id="rPhone"></span></p>
+      <p><strong>Summary:</strong><br><span id="rSummary"></span></p>
+      <p><strong>Education:</strong><br><span id="rEducation"></span></p>
+      <p><strong>Experience:</strong><br><span id="rExperience"></span></p>
+      <p><strong>Skills:</strong><br><span id="rSkills"></span></p>
+      <button class="print-btn" onclick="window.print()">🖨️ Print Resume</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('resumeForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      document.getElementById('rName').textContent = document.getElementById('name').value;
+      document.getElementById('rEmail').textContent = document.getElementById('email').value;
+      document.getElementById('rPhone').textContent = document.getElementById('phone').value;
+      document.getElementById('rSummary').textContent = document.getElementById('summary').value;
+      document.getElementById('rEducation').textContent = document.getElementById('education').value;
+      document.getElementById('rExperience').textContent = document.getElementById('experience').value;
+      document.getElementById('rSkills').textContent = document.getElementById('skills').value;
+
+      document.getElementById('resume').style.display = 'block';
+      document.getElementById('resume').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
+
